@@ -4,5 +4,13 @@
 body {
   background-image: url('assets/background.webp');
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 100%;
+}
+
+h1 {
+  text-align: center;
+}
+
+.text-danger {
+  font-weight: bold;
 }
