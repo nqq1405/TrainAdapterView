@@ -1,27 +1,34 @@
 <div class="container">
   <form (submit)="onSubmit(formConvert)" #formConvert="ngForm">
     <div class="form-group">
-      <label for="convertType">Chọn kiểu dữ liệu cần Convert</label>
+      <label for="convertType">Chọn kiểu dữ liệu đầu vào</label>
     </div>
     <select
       class="form-control"
       id="convertType"
       ngModel
-      #selectType="ngModel"
       name="convertType"
       required
+      #selectType="ngModel"
     >
-      <option value="" selected>---Chọn---</option>
-      <option value="stringtobase64">String --> Base64</option>
-      <option value="base64tostring">Base64 --> String</option>
-      <option value="stringtohex">String --> Hex</option>
-      <option value="hextostring">Hex --> String</option>
-<!--      <option value="imagetobase64">Image &ndash;&gt; Base64</option>-->
-<!--      <option value="base64toimage">Base64 &ndash;&gt; Image</option>-->
+      <option value="" >Chọn kiểu dữ liệu đầu vào</option>
+      <option selected *ngFor="let cv of convertElement" value="{{cv}}" selected>{{cv}}</option>
     </select>
+    <span class="text-danger" *ngIf="selectType.touched && selectType.errors?.['required']">*Trường này không được để trống</span>
+    <br/>
+    <select
+      class="form-control"
+      id="convertType2"
+      ngModel
+      name="convertType2"
+      required
+      #selectType2="ngModel"
+    >
+      <option value="">Chọn kiểu dữ liệu cần convert</option>
+      <option selected *ngFor="let cv of convertElement" value="{{cv}}" selected>{{cv}}</option>
+    </select>
+    <span class="text-danger" *ngIf="selectType2.touched && selectType2.errors?.['required']">*Trường này không được để trống</span>
 
-    <span class="text-danger" *ngIf="selectType.touched && selectType.errors?.['required']">
-            *Trường này không được để trống</span>
     <div *ngIf="!isShow && !isShowImage">
       <div class="form-group">
         <label for="inputString">Dữ liệu vào</label>
@@ -33,6 +40,7 @@
           #txtInputString="ngModel"
           name="inputString"
           required
+          [(ngModel)]="data"
         />
         <span class="text-danger" *ngIf="txtInputString.touched && txtInputString.errors?.['required']">
               *Trường này không được để trống</span
